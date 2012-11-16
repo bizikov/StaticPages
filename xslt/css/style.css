@@ -45,6 +45,12 @@ label{
 	text-transform: uppercase;
 	color: #666;
 }
+.container_16{
+    width: 90% !important;
+}
+.container_16 .grid_16 {
+    width: 100% !important;
+}
 .btn {
     padding: 6px 20px;
 	cursor: pointer;
@@ -73,7 +79,7 @@ h2{
 	border-radius: 3px;
 }
 #area{
-	width: 880px;
+	width: 95%;
 	height: 350px;
 	margin: 0 20px 20px 20px;
 	resize: none;
@@ -82,7 +88,7 @@ div.form_name{
 	margin: 20px 0 10px 30px;
 }
 div.desc{
-	margin: 20px 0 10px 30px;
+	margin: 20px 0 10px 20px;
 }
 div.name{
 	margin: 20px 0 10px 10px;
@@ -93,7 +99,7 @@ div.radio{
 } 
 div.add{
 	float: right;
-	margin: 43px -5px 10px 0;
+	margin: 43px 10px 10px 0;
 }
 div.save{
 	margin: 10px;
