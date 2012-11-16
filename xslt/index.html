@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/960_16_col.css"/>
     <script type="text/javascript">
 
-        var globalBegin = "<?xml version=\u00221.0\u0022 encoding=\u0022UTF-8\u0022?>\r\n <xsl:stylesheet version = \u00221.0\u0022 xmlns:xsl=\u0022http://www.w3.org/1999/XSL/Transform\u0022\r\n \txmlns:ns4=\u0022http://idecs.atc.ru/pgufg/ws/fgapc/\u0022\r\n \txmlns:rev=\u0022http://smev.gosuslugi.ru/rev120315\u0022\r\n \texclude-result-prefixes=\u0022xsl ns4\u0022 >\r\n \t<xsl:output method=\u0022xml\u0022 version=\u00221.0\u0022 encoding=\u0022UTF-8\u0022 indent=\u0022yes\u0022 omit-xml-declaration=\u0022yes\u0022/>\r\n \t<xsl:template match=\u0022/\u0022>\r\n  \t\t<rev:Params>\r\n"
+        var globalBegin = "<?xml version=\u00221.0\u0022 encoding=\u0022UTF-8\u0022?>\r\n <xsl:stylesheet version = \u00221.0\u0022 xmlns:xsl=\u0022http://www.w3.org/1999/XSL/Transform\u0022\r\n \txmlns:ns4=\u0022http://idecs.atc.ru/pgufg/ws/fgapc/\u0022\r\n \txmlns:rev=\u0022http://smev.gosuslugi.ru/rev120315\u0022\r\n \texclude-result-prefixes=\u0022xsl ns4\u0022 >\r\n \t<xsl:output method=\u0022xml\u0022 version=\u00221.0\u0022 encoding=\u0022UTF-8\u0022 indent=\u0022yes\u0022 omit-xml-declaration=\u0022yes\u0022/>\r\n \t<xsl:template match=\u0022/\u0022>\r\n  \t<rev:Params>\r\n"
 
         var revParamBeginPartOne = "\t\t<rev:Param desc=\u0022"
         var revParamBeginPartTwo = "\u0022 dest=\u0022proc\u0022 type=\u0022"
@@ -19,7 +19,7 @@
         var revNameEnd = "</rev:name>\r\n"
         var revValueBegin = "\t\t\t<rev:value><xsl:value-of select=\u0022//ns4:object[ns4:code = \u0027"
         var revValueEnd = "\u0027]/ns4:value\u0022/></rev:value>\r\n"
-        var revParamEnd = "\t</rev:Param>\r\n"
+        var revParamEnd = "\t\t</rev:Param>\r\n"
 
         var globalEnd = "\t</rev:Params>\r\n \t</xsl:template>\r\n </xsl:stylesheet>"
 
@@ -31,7 +31,7 @@
 
         function generateResult() {
             var middle = document.getElementById("area").value;
-            document.getElementById("area").value = globalBegin + middle+"\r\n" + globalEnd;
+            document.getElementById("area").value = globalBegin + middle + globalEnd;
         }
 
         function addXSLTString() {
@@ -46,7 +46,7 @@
             var resultString = revParamBeginPartOne + desc + revParamBeginPartTwo +
                     type + revParamBeginPartThree + revNameBegin + name + revNameEnd +
                     revValueBegin + name + revValueEnd + revParamEnd
-            document.getElementById("area").value += "\r\n" + resultString;
+            document.getElementById("area").value += "\r\n" + resultString + "\r\n";
             document.getElementById("desc").value = "";
             document.getElementById("name").value = "";
         }
