@@ -31,7 +31,7 @@
 
         function generateResult() {
             var middle = document.getElementById("area").value;
-            document.getElementById("area").value = globalBegin + middle + globalEnd;
+            document.getElementById("area").value = globalBegin + middle+"\r\n" + globalEnd;
         }
 
         function addXSLTString() {
@@ -46,7 +46,7 @@
             var resultString = revParamBeginPartOne + desc + revParamBeginPartTwo +
                     type + revParamBeginPartThree + revNameBegin + name + revNameEnd +
                     revValueBegin + name + revValueEnd + revParamEnd
-            document.getElementById("area").value += "\r\n" + resultString + "\r\n";
+            document.getElementById("area").value += "\r\n" + resultString;
             document.getElementById("desc").value = "";
             document.getElementById("name").value = "";
         }
