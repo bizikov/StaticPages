@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>XSLT редактор</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/text.css" />
+<link rel="stylesheet" href="css/960_16_col.css" />
+<script type="text/javascript">
+var Begin =""
+var revParamBeginPartOne = "<rev:Param desc=\u0022"
+var revParamBeginPartTwo="\u0022 dest=\u0022proc\u0022 type=\u0022"
+var revParamBeginPartThree= "\u0022>"
+var revNameBegin = "<rev:name>"
+var revNameEnd = "</rev:name>"
+var revValueBegin = "<rev:value><xsl:value-of select=\u0022//ns4:object[ns4:code = \u0027"
+var revValueEnd = "\u0027]/ns4:value\u0022/></rev:value>"
+var revParamEnd="</rev:Param>"
+
+
+function clearArea() {
+document.getElementById("area").value ="";
+document.getElementById("desc").value ="";
+document.getElementById("name").value ="";
+}
+
+function addXSLTString() {
+var desc = document.getElementById("desc").value
+var name = document.getElementById("name").value
+if (document.getElementById("String").checked==true) {
+var type = "String"
+} 
+if (document.getElementById("Date").checked==true) {
+var type = "Date"
+}
+var resultString = revParamBeginPartOne+desc+revParamBeginPartTwo+
+type+revParamBeginPartThree+revNameBegin+name+revNameEnd+
+revValueBegin+name+revValueEnd+revParamEnd
+document.getElementById("area").value += "\r\n"+resultString+"\r\n";
+}
+</script>
+</head>
+
+<body>
+<div class="logo container_16">
+<h2>XSLT редактор</h2>
+</div>
+<div class="wrapper container_16">
+  <form id="form1" name="form1" method="post" action="#">
+    
+	<div class="grid_3 form_name">
+		<label>Имя формы<input type="text" name="form_name" id="form_name" /></label>
+    </div>
+	
+	<div class="grid_3 desc">
+		<label>Название поля</label><input type="text" name="desc" id="desc"/>
+    </div>
+    <div class="grid_3 name ">
+		<label>Имя переменной</label><input type="text" name="desc" id="name"/>
+    </div>
+	
+	<div class="grid_3 radio">
+		<label><input type="radio" name="radio" id="String" value="String" checked=true />String</label>
+		<label><input type="radio" name="radio" id="Date" value="Date" />Date</label>
+    </div>  
+	<div class="grid_3 add">
+		<label><input type="button" name="add" class="btn" id="add" value="Добавить" onclick="addXSLTString();" /></label>
+	</div>
+	<div class="clear"></div>
+	
+	<div class="grid_16 area">
+		<textarea name="area" id="area" cols="45" rows="5"></textarea>
+    </div>
+	<div class="clear"></div>
+	
+	<div class="grid_16 save" align="center">
+		<label><input type="button" name="clear" class="btn" id="clear" value="Очистить" onclick="clearArea();" /></label>
+		<!--<label><input type="submit" name="Новая форма" class="btn" id="new_form" value="Новая форма" /></label>-->
+	</div>
+  </form>
+</div>
+
+<div class="container_16">
+  <div class="grid_16 footer">
+	generator form creators <a href="http://bizikov.ru">bizi</a> & <a href="http://vk.com/id16095292">hal</a>
+  </div>
+</div>
+</body>
+</html>
