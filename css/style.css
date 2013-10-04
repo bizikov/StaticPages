@@ -36,9 +36,6 @@ form input[type=password]:focus,
 form textarea:focus {
     outline: none;
     border-color: #33ccff;
-    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(4, 143, 208);
-    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(4, 143, 208);
-    box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1), 0 0 2px rgba(4, 143, 208);
 }
 label{
 	font-size: 12px;
@@ -75,12 +72,12 @@ h2{
 .wrapper{
 	background: #FFF;
 	overflow: hidden;
+    padding: 20px;
 	border-radius: 3px;
 }
 #area{
-	width: 95%;
+	width: 100%;
 	height: 350px;
-	margin: 0 20px 20px 20px;
 	resize: none;
 }
 div.form_name{
@@ -98,7 +95,7 @@ div.radio{
 } 
 div.add{
 	float: right;
-	margin: 43px 10px 10px 0;
+	margin: 50px 20px 10px 0;
 }
 div.save{
 	margin: 10px;

@@ -1,21 +1,138 @@
-<!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Staticpages by bizikov</title>
-    <link rel="stylesheet" href="xslt/css/style.css"/>
-    <link rel="stylesheet" href="xslt/css/reset.css"/>
-    <link rel="stylesheet" href="xslt/css/text.css"/>
-    <link rel="stylesheet" href="xslt/css/960_16_col.css"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>XSLT редактор</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="css/text.css"/>
+    <link rel="stylesheet" href="css/960_16_col.css"/>
+    <script type="text/javascript">
+
+        var globalBegin = "<?xml version=\u00221.0\u0022 encoding=\u0022UTF-8\u0022?>\r\n <xsl:stylesheet version = \u00221.0\u0022 xmlns:xsl=\u0022http://www.w3.org/1999/XSL/Transform\u0022\r\n \txmlns:i=\u0022http://www.w3.org/2001/XMLSchema-instance\u0022\r\n\txmlns:ns4=\u0022http://idecs.atc.ru/pgufg/ws/fgapc/\u0022\r\n \txmlns:urpr=\u0022http://ics.perm.ru/gu/urpr\u0022\r\n \txmlns:ns2=\u0022http://smev.gosuslugi.ru/rev120315\u0022\r\n \texclude-result-prefixes=\u0022xsl ns4\u0022 >\r\n \n\t<xsl:output method=\u0022xml\u0022 version=\u00221.0\u0022 encoding=\u0022UTF-8\u0022 indent=\u0022yes\u0022 omit-xml-declaration=\u0022yes\u0022/>\r\n \t<xsl:template match=\u0022/\u0022>\r\n"
+
+        var revParamBeginPartOne = "\t\t<xsl:choose>\n"
+
+        var revParamBeginPartTwo = "\t\t\t<xsl:when test=\u0022//ns4:object[ns4:code = \u0027"
+        var revParamBeginPartThree = "\u0027]/ns4:value != \u0027\u0027\u0022/>"
+        var revNameBegin = "\n\t\t\t\t<urpr:"
+        var revNameEnd = ">"
+        var revValueBegin = "\n\t\t\t\t\t<xsl:value-of select=\u0022//ns4:object[ns4:code = \u0027"
+        var revValueEnd = "\u0027]/ns4:value\u0022/>"
+        var revNameBegin_end = "\n\t\t\t\t</urpr:"
+        var revNameEnd_end = ">"
+        var revXslEnd = "\n\t\t\t</xsl:when>"
+
+        var otherwiseBegin = "\n\t\t\t<xsl:otherwise>"
+        var otherwiseBodyBegin = "\n\t\t\t\t<urpr:"
+        var otherwiseBodyEnd = " i:nil=\u0027true\u0027 />"
+        var otherwiseEnd = "\n\t\t\t</xsl:otherwise>"
+
+        var revParamEnd = "\n\t\t</xsl:choose>"
+
+
+        var xslTemplateBegin = "\n\t</xsl:template>\n\n<xsl:template match=\u0022//ns2:AppliedDocuments\u0022>\n\t<xsl:for-each select=\u0022./ns2:AppliedDocument\u0022>\n\t\t<urpr:AppliedDocument>\n\t\t\t<xsl:variable name=\u0022num\u0022>\n\t\t\t\t<xsl:number value=\u0022position()\u0022/>\n\t\t\t</xsl:variable>\n\t\t\t<urpr:CodeDocument>\n\t\t\t\t<xsl:value-of select=\u0022./ns2:CodeDocument\u0022/>\n\t\t\t</urpr:CodeDocument>\n\t\t\t<xsl:choose>\n\t\t\t<xsl:variable name=\u0022realNum\u0022 select=\u0022$num - 1\u0022/>\n\t\t\t\t<xsl:when test=\u0022//ns4:object[ns4:code = \u0027"
+        var xslWhenBegin = "\u0027 and ns4:attrs/ns4:entry/ns4:value = $realNum]/ns4:object[ns4:code = \u0027"
+        var xslWhenBody = "\u0027]/ns4:value != \u0027\u0027\u0022>"
+
+        var urprDescriptionBegin = "\n\t\t\t\t\t<urpr:Description>\n\t\t\t\t\t\t<xsl:value-of select=\u0022//ns4:object[ns4:code = \u0027"
+        var urprDescriptionBody = "\u0027 and ns4:attrs/ns4:entry/ns4:value = $realNum]/ns4:object[ns4:code = \u0027"
+        var urprDescriptionBodyEnd = "\u0027]/ns4:value != \u0027\u0027\u0022 >"
+        var urprDescriptionEnd = "\n\t\t\t\t\t</urpr:Description>\n\t\t\t\t</xsl:when>\n\t\t\t\t<xsl:otherwise>\n\t\t\t\t\t<urpr:Description i:nil=\u0027true\u0027 />\n\t\t\t\t</xsl:otherwise>\n\t\t\t</xsl:choose>\n\t\t\t<urpr:DigestValue>\n\t\t\t\t<xsl:value-of select=\u0022./ns2:DigestValue\u0022/>\n\t\t\t</urpr:DigestValue>\n\t\t\t<urpr:Name>\n\t\t\t\t<xsl:value-of select=\u0022./ns2:URL\u0022/>\n\t\t\t</urpr:Name>\n\t\t\t<xsl:choose>\n\t\t\t\t<xsl:variable name=\u0022realNum\u0022 select=\u0022$num - 1\u0022/>\n\t\t\t\t\t<xsl:when test=\u0022//ns4:object[ns4:code = \u0027"
+        var urprDescriptionEndBodyBegin ="\u0027 and ns4:attrs/ns4:entry/ns4:value = $realNum]/ns4:object[ns4:code = \u0027"
+        var urprDescriptionEndBodyEnd = "\u0027]/ns4:value != \u0027\u0027\u0022 >"
+        var urprNoteBegin = "\n\t\t\t\t\t\t<urpr:Note>\n\t\t\t\t\t\t\t\t<xsl:value-of select=\u0022//ns4:object[ns4:code = \u0027"
+        var urprNoteBody = "\u0027 and ns4:attrs/ns4:entry/ns4:value = $realNum]/ns4:object[ns4:code = \u0027"
+        var urprNoteEnd = "\u0027]/ns4:value\u0022 />\n\t\t\t\t\t\t</urpr:Note>\n\t\t\t\t\t</xsl:when>\n\t\t\t\t\t<xsl:otherwise>\n\t\t\t\t\t\t<urpr:Note i:nil=\u0027true\u0027 />\n\t\t\t\t\t</xsl:otherwise>\n\t\t\t</xsl:choose>\n\t\t\t<urpr:Number>\n\t\t\t\t<xsl:value-of select=\u0022$num\u0022/>\n\t\t\t</urpr:Number>\n\t\t\t<urpr:TypeId>\n\t\t\t\t<xsl:value-of select=\u0022./ns4:object[ns4:code = \u0027TypeId\u0027]/ns4:value\u0022/>\n\t\t\t</urpr:TypeId>\n\t\t\t<urpr:URL>\n\t\t\t\t<xsl:value-of select=\u0022./ns2:URL\u0022/>\n\t\t\t</urpr:URL>\n\t\t</urpr:AppliedDocument>\n\t</xsl:for-each>\n</xsl:template>\n</xsl:stylesheet>"
+
+
+        function clearArea() {
+            document.getElementById("area").value = "";
+            document.getElementById("desc").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("namePanelDoc").value = "";
+            document.getElementById("nameFieldDesc").value = "";
+            document.getElementById("nameFieldNote").value = "";
+        }
+
+        function generateResult() {
+            var middle = document.getElementById("area").value;
+            document.getElementById("area").value = globalBegin + middle + generateResultEnd();
+        }
+
+        function generateResultEnd() {
+            var namePanelDoc = document.getElementById("namePanelDoc").value;
+            var nameFieldDesc = document.getElementById("nameFieldDesc").value;
+            var nameFieldNote = document.getElementById("nameFieldNote").value;
+            return xslTemplateBegin + namePanelDoc + xslWhenBegin + nameFieldDesc + xslWhenBody + urprDescriptionBegin + namePanelDoc + urprDescriptionBody + nameFieldDesc + urprDescriptionBodyEnd + urprDescriptionEnd + namePanelDoc + urprDescriptionEndBodyBegin + nameFieldNote + urprDescriptionBodyEnd + urprNoteBegin + namePanelDoc + urprNoteBody + nameFieldNote + urprNoteEnd
+        }
+
+        function addXSLTString() {
+            var desc = document.getElementById("desc").value
+            var name = document.getElementById("name").value
+
+            var resultString = revParamBeginPartOne + revParamBeginPartTwo + desc
+                    + revParamBeginPartThree + revNameBegin + name + revNameEnd +
+                    revValueBegin + desc + revValueEnd + revNameBegin_end + name + revNameEnd_end + revXslEnd +
+                    otherwiseBegin + otherwiseBodyBegin + name + otherwiseBodyEnd + otherwiseEnd + revParamEnd
+
+            document.getElementById("area").value += "\r\n" + resultString + "\r\n";
+            document.getElementById("desc").value = "";
+            document.getElementById("name").value = "";
+
+
+        }
+    </script>
 </head>
+
 <body>
 <div class="logo container_16">
-    <h2>Сервисы</h2>
+    <h2>XSLT редактор</h2>
 </div>
-<div class="wrapper container_16" style="padding: 30px">
-    <p><a href="xslt/index.html">XSLT редактор (v 1.0)</a></p>
-    <p><a href="xslt/index_old.html">XSLT редактор (v 0.2)</a></p>
+<div class="wrapper container_16">
+    <form id="form1" name="form1" method="post" action="#">
+
+        <div class="grid_3 desc">
+            <label>Название поля</label><input type="text" required name="desc" id="desc"/>
+        </div>
+        <div class="grid_4 name ">
+            <label>Имя переменной</label><input type="text" required name="desc" id="name"/>
+        </div>
+
+        <div class="grid_3 name ">
+            <label>Имя панели с док-ми</label><input type="text" required name="desc" id="namePanelDoc"/>
+        </div>
+
+        <div class="grid_3 name ">
+            <label>Имя поля с описанием</label><input type="text" required name="desc" id="nameFieldDesc"/>
+        </div>
+
+        <div class="grid_3 name ">
+            <label>Имя поля с примечанием</label><input type="text" required name="desc" id="nameFieldNote"/>
+        </div>
+
+        <div class="grid_3 add">
+            <label><input type="button" name="add" class="btn" id="add" value="Добавить"
+                          onclick="addXSLTString();"/></label>
+        </div>
+        <div class="clear"></div>
+
+        <div class="area">
+            <textarea name="area" id="area" cols="45" rows="5"></textarea>
+        </div>
+
+        <div class="grid_16 save" align="center">
+            <label><input type="button" name="clear" class="btn" id="clear" value="Очистить"
+                          onclick="clearArea();"/></label>
+            <label><input type="button" name="addtag" class="btn" id="addtag" value="Добавить теги"
+                          onclick="generateResult() ;"/></label>
+        </div>
+    </form>
+</div>
+
+<div class="container_16">
+    <div class="grid_16 footer">
+        generator form creators <a href="http://bizikov.ru">bizi</a> & <a href="http://vk.com/id16095292">hal</a>
+    </div>
 </div>
 </body>
 </html>
